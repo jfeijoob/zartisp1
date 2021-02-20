@@ -1,0 +1,36 @@
+{
+  "fuelings": [
+    {
+      "vehicle": 0,
+      "liters": 18.2,
+      "literPrice": 1.049,
+      "amount": 19.09,
+      "date": "2021-01-15T14:49:00.000Z",
+      "odometer": 22741
+    },
+    {
+      "vehicle": 0,
+      "liters": 41.57,
+      "literPrice": 1.095,
+      "amount": 45.52,
+      "date": "2021-02-03T20:18:00.000Z",
+      "odometer": 23205
+    },
+    {
+      "vehicle": 1,
+      "liters": 48.7,
+      "literPrice": 0.669,
+      "amount": 32.58,
+      "date": "2021-01-23T13:18:00.000Z",
+      "odometer": 177896
+    },
+    {
+      "vehicle": 1,
+      "liters": 44.76,
+      "literPrice": 0.611,
+      "amount": 27.35,
+      "date": "2021-02-06T20:09:00.000Z",
+      "odometer": 178262
+    }
+  ]
+}

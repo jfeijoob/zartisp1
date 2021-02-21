@@ -11,11 +11,11 @@ class GarageService {
     }
 
     async findAllVehicles(){
-        return await this.VehicleModel.find();
+        return this.VehicleModel.find();
     }
 
     async findVehiclesById( ids ){
-        return await this.VehicleModel.find( {
+        return this.VehicleModel.find( {
             '_id': {
                 $in: ids
             }
@@ -23,29 +23,29 @@ class GarageService {
     }
 
     async findVehicleById( vehicleId ){
-        return await this.VehicleModel.findById( vehicleId );
+        return this.VehicleModel.findById( vehicleId );
     }
 
     async findAllFuelings( vehicle=false ){
         const result = this.FuelingModel.find();
         if( vehicle )
             result.populate('vehicle');
-        return await result;
+        return result;
     }
 
     async findAllFuelingsByVehicleId(  vehicle=false, vehicleId ){
         const result = this.FuelingModel.find( { vehicle:vehicleId } );
         if( vehicle )
             result.populate('vehicle');
-        return await result;
+        return result;
     }
 
-    async createManyVehicle( vehicles ){
-        return await this.VehicleModel.insertMany( vehicles, {ordered:false} );
+    async createManyVehicles( vehicles ){
+        return this.VehicleModel.insertMany( vehicles, {ordered:false} );
     }
 
     async createVehicle( vehicle ){
-        return await this.VehicleModel.create( vehicle );
+        return this.VehicleModel.create( vehicle );
     }
 
     async deleteVehicleById( vehicleId ){
@@ -67,7 +67,7 @@ class GarageService {
 
 
     async addFueling( vehicleId, fueling ){
-        return await this.FuelingModel.create( {
+        return this.FuelingModel.create( {
             vehicle: vehicleId,
             ...fueling
         } );

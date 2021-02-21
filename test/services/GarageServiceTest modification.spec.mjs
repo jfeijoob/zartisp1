@@ -31,7 +31,7 @@ describe( 'TodoService modification operations',
             let opelCorsa2Id = new mongoose.Types.ObjectId();
             let vwGolf5Id = new mongoose.Types.ObjectId();
 
-            let vehicles = await garageService.createManyVehicle([
+            let vehicles = await garageService.createManyVehicles([
                 { "name": "VW Golf 5"   },
                 { "name": "Opel Corsa 2"},
                 { "name": "Opel Corsa 1" }
@@ -51,14 +51,14 @@ describe( 'TodoService modification operations',
             let opelCorsa2Id = new mongoose.Types.ObjectId();
             let vwGolf5Id = new mongoose.Types.ObjectId();
 
-            let vehicles1 = await garageService.createManyVehicle([
+            let vehicles1 = await garageService.createManyVehicles([
                 { "_id": duplicateId1, "name": "VW Golf 1"    },
                 { "_id": duplicateId2, "name": "VW Golf 2"    },
                 { "_id": opelCorsa1Id, "name": "Opel Corsa 1" }
             ]);
 
             try {
-                let vehicles2 = await garageService.createManyVehicle([
+                let vehicles2 = await garageService.createManyVehicles([
                     { "_id": vwGolf5Id   , "name": "VW Golf 5"   },
                     { "_id": duplicateId1, "name": "VW Golf 3"   },
                     { "_id": opelCorsa2Id, "name": "Opel Corsa 2"},

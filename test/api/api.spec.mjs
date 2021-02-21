@@ -4,11 +4,11 @@ import { api, httpServer} from '../../api/api.mjs';
 import request from 'supertest';
 import sinon from 'sinon';
 
-async function generateVehicleTests(){
+async function generateVehicleTests( numVehicles ){
     let vehicles = '';
     const serializer = ndjson.stringify();
 
-    for( let i = 0; i < 101; i++ ){
+    for( let i = 0; i < numVehicles; i++ ){
         serializer.write({
             "name": `Vehicle ${i}`
         });
@@ -48,19 +48,25 @@ describe('Rest API Test', () => {
     });
 
     it('Create Multiple Vehicles', async () => {
-        let vehicles = await generateVehicleTests();
+        let vehicles = await generateVehicleTests( 101 );
 
-        sinon.stub(garageService, 'createManyVehicles').returns([{name:'test vehicle'}]);
+        const createManyVehicles = sinon.stub(garageService, 'createManyVehicles')
+            .returns([{name:'test vehicle'}]);
+
+
         await request(api).post('/vehicles')
             .send(vehicles)
             .set('Content-Type', 'application/x-ndjson')
             .expect(200).expect('Content-Type', /json/);
+
+        // There is a loop in entry point that sends chucks of
+        sinon.assert.callCount(createManyVehicles,3)
         sinon.restore();
     });
 
 
     it('Create Multiple Vehicles with wrong content type', async () => {
-        let vehicles = await generateVehicleTests();
+        let vehicles = await generateVehicleTests( 5 );
 
         sinon.stub(garageService, 'createManyVehicles').returns([{name:'test vehicle'}]);
         await request(api).post('/vehicles')
@@ -71,7 +77,6 @@ describe('Rest API Test', () => {
     });
 
     it('Create Multiple Vehicles with wrong body format', async () => {
-        let vehicles = await generateVehicleTests();
 
         sinon.stub(garageService, 'createManyVehicles').returns([{name:'test vehicle'}]);
         await request(api).post('/vehicles')
